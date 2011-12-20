@@ -1,0 +1,18 @@
+body {
+	background-color: white;
+	color: black;
+}
+
+#header {
+	background-color: white;
+}
+
+#edit {
+	color: red;
+	font-size: 12;
+}
+
+#closeList {
+	color: red;
+	font-size: 12;
+}

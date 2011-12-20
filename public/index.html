@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <title>TaDa List -- Justin Valerius</title>
+      <link rel="stylesheet" type="text/css" href="stylesheets/tada.css"/>
+      <script src="javascripts/test.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <img src="images/tada-mark-bg.gif" alt="TaDa logo">
+      <a href="#" id="myList">My Lists</a>
+      This List: <a href="#" id="edit">Edit</a>
+    </div>
+    
+    <div id="checkList">
+      <h2>School</h2>
+      <input type="checkbox" class="list1" name="list" id="checkbox-1" value="1"/><a id="item-1" value="Web">Web Development</a><br>
+      <input type="checkbox" name="list" class="list1" id="checkbox-2" value="2"/><a id="item-2" value="Structures">Structures<a><br>
+      <input type="checkbox" name="list" class="list1" id="checkbox-3" value="3"/><a id="item-3" value="System">Systems Analysis and Design</a><br>
+    </div>
+    
+    <div id="checkListHead">
+      <label>Items</label>
+    </div>
+
+    <div id="changes">
+      <button id="save">Save this list</button> or <a href="#" id="cancel">Cancel</a>
+    </div>
+    
+    
+    <br><br>
+
+    <div id="newItem">
+      <input type="text" id="item" name="textField"/>
+      <br>
+      <a id="submit" href="#"><img src="images/add.gif" alt="submit button"/></a>
+      <a id="closeList" href="#">Close</a>
+    </div>
+
+    <div id="addItem">
+      <button id="add">Add Another Item</button>
+    </div>
+
+
+    <script>
+      
+     $("#checkListHead").hide();
+     $("#changes").hide();
+      
+     var itemNumber = 4;
+     //Adding the new item form to the page
+     $("#newItem").hide();
+     $("#add").click(function() {
+      $("#addItem").hide();
+      $("#newItem").show();
+     });
+    
+     $("#cancel").click(function() {
+      $("#checkList").show();
+      $("#header").show();
+      $("#addItem").show();
+      $("#checkListHead").hide();
+      $("#changes").hide();
+      $("#checkListEdit").remove();
+     });
+      
+     var tag = "<button id='xbut'>X</button><br>";
+     $("#edit").click(function() {
+      $("#checkList").hide();
+      $("#header").hide();
+      $("#addItem").hide();
+      $("#newItem").hide();
+      $("#checkListHead").show();
+      $("#changes").show();
+      $("#checkListHead").append("<div id='checkListEdit'></div>");
+      for (var i = 1; i < increment; i++) {
+	$("#checkListEdit").append(
+	"<input type='text' id='textitem-"+i+"' name='TextField' value='"+$('#item-'+i).text()+"' size='60'/>"+tag
+	);
+      }
+      });
+  
+     //Save Button
+     $("#save").click(function() {
+      for (var j = 1; j < increment; j++) {
+	var info = $("#textitem-"+j).val();
+	$("#item-"+j).text(info);
+      }
+      $("#checkList").show();
+      $("#header").show();
+      $("#addItem").show();
+      $("#checkListHead").hide();
+      $("#changes").hide();
+      $("#checkListEdit").remove();
+     });
+
+     //Returning to the last list on the page
+     $("#closeList").click(function() {
+      $("#addItem").show();
+      $("#newItem").hide();
+     });
+     
+     var increment = 4;
+     //Adding an item to the list
+     $("#submit").click(function() {
+      $("#checkList").append( 
+	"<input type='checkbox' class='list1' name='list' id='checkbox-"+increment+"' value='4'/><a id='item-"+increment+"'>"+$('#item').val()+"<a><br>" 
+      );
+      increment++; //incrementing the variable upwards to delete the right portion each time an item is added
+     });
+
+     //Removing an item once the checkbox is clicked
+     $(".list1").click(function(){
+      $("input[id^='checkbox']:checked").each(function() {
+	var parts = $(this).attr("id").split("-");
+	$("#item-"+parts[1]).remove();
+	$(this).hide();
+	//increment--;
+      });
+     });
+
+    </script>
+  </body>
+</html>
